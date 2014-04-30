@@ -24,7 +24,7 @@ There is also a fade method.
 
 I'm currently working on slideUp, slideDown, and mixed interval mechanics (i.e. parabolic, cubic, bounce, and liquid tension).
 
-## The skinny:
+## The skinny
 
 ```javascript
 
@@ -49,7 +49,7 @@ Note: Stop only works for click events at the document level at the moment, in f
 
 Note: Interval will be implemented in later updates, for now, it will always revert to default.
 
-## Animate Something:
+## Animate Something
 
 To animate something you can pick one of three methods:
 
@@ -91,7 +91,7 @@ It is possible to pass as many arguments into args from pArgs as you so choose.
 
 Note: If you plan on animating top, right, bottom, or left, it is not my responsibility to set the position of the animation element.
 
-That is about the gist of this library.
+That is about the gist of it.
 
 If you have any other questions email me [here](http://www.joegroseclose.com) or comment on the library.
 
