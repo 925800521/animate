@@ -6,6 +6,7 @@ A quick and dirty animation library
 pArgs delineates the potential things which can be animated:
 
 ```javascript
+
 pArgs = ['top', 
          'right', 
          'bottom', 
@@ -18,6 +19,7 @@ pArgs = ['top',
          'margin-bottom', 
          'opacity', 
          'color'];
+         
 ```
 
 There is also a fade method.
