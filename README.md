@@ -39,7 +39,7 @@ var a = new Animate(element, callback, stop, interval);
 ```
 
 | Argument      | Functionality                                                                                          |
-| ------------- |:------------------------------------------------------------------------------------------------------:|
+| ------------- | ------------------------------------------------------------------------------------------------------ |
 | element       | The element you're trying to animate.                                                                  |
 | callback      | Some callback to be performed after the animation.                                                     |
 | stop          | Boolean. Allows for animation to be executed immediately upon further interatcion with the element.    |
