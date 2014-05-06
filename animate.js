@@ -3,9 +3,6 @@ var Animate = (function(doc) {
 	//variables
 	var i = 0,
 		pArgs = ['top', 'right', 'bottom', 'left', 'height', 'width', 'margin-top', 'margin-right', 'margin-left', 'margin-bottom', 'opacity', 'color'];
-	//requires
-	// var U = require('./util'),
-		// E = require('./eventManager');
 	function animate(element, callback, stop, fn) {
 		this.element = element;
 		this.style = {};
@@ -34,16 +31,16 @@ var Animate = (function(doc) {
 				}
 				if (typeof(this.callback) === 'function') {
 					return this.callback();
-					//TODO recursive animate stop -- or just assume user is intelligent enough to not nest animation
+					//TODO recursive animate stop
 				}
 				return false;
 			};
-			E.addEvent(this.element, 'click', stopFn.bind(this));
+			addEvent(this.element, 'click', stopFn.bind(this));
 		}
 		//TODO parabolic & bounce types -- I wouldn't try to use this in the meantime
 		this.intervalObj = {
 			'default': {
-				posDimMargin: function(a, q, n) {
+				posDimMargin: function(q, n) {
 					return q / n;
 				}
 				, color: '(notq/n)'
@@ -128,14 +125,12 @@ var Animate = (function(doc) {
 				return;
 			}
 		}
-		if (i == 0 && disp == 0) {
+		if (i === 0 && disp === 0) {
 			this.element.style.display = inline ? 'inline-block' : 'block';
-			//this.element.style.opacity = '1';
 		}
 		this.element.style.opacity = (parseFloat((this.element.style.opacity === "" ? disp : this.element.style.opacity), 10) + interval).toString();
-		if (i == n - 1 && disp >= 1) {
-			this.element.style.display = 'none';
-			//this.element.style.opacity = '1';
+		if (i == n - 1) {
+			this.element.style.display = (disp >=1 ? 'none' : (inline ? 'inline-block' : 'block'));
 		}
 		i++;
 		this.timeout = setTimeout(this.fade.bind(this, disp, n, inline), this.timer / n);
@@ -150,7 +145,7 @@ var Animate = (function(doc) {
 		this.fade(getStyle(this.element, 'opacity'), n);
 	};
 	function posDimMargin(a, el, dim, q, n) {
-		var interval = a.interval.posDimMargin(a, q, n);
+		var interval = a.interval.posDimMargin(q, n);
 		el.style[dim] = (getStyle(el, dim) + interval).toString() + 'px';
 		if (i == n - 1) {
 			el.style[dim] = (unit(a.style[dim]) + q).toString() + 'px';
@@ -206,7 +201,7 @@ var Animate = (function(doc) {
          }
          return false;
     }
-    function getStyle(el, cssprop){
+    function getStyle(el, cssprop) {
  		if (el.currentStyle) {
  			return unit(el.currentStyle[cssprop]);
  		}
@@ -218,7 +213,14 @@ var Animate = (function(doc) {
   		}
 	}
 	function unit(v) {
-		return parseFloat(v.replace(/px|%/g, ''), 10);
+		if (!v) {
+			return;
+		}
+		var V = v.toString().replace(/px|%/g, '');
+		if (typeof(v) === 'number' || isNaN(+V)) {
+			return v;
+		}
+		return +V;
 	}
 	function addEvent(element, type, fn) {
     	if (!element) {
